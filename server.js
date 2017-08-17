@@ -7,7 +7,19 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-mongoose.connect('mongodb://heroku_t05dnrwd:la2ijp9nttr5t62skgipbcoh89@ds151163.mlab.com:51163/heroku_t05dnrwd');
+
+var uristring =
+process.env.MONGOLAB_URI ||
+process.env.MONGOHQ_URL ||
+'mongodb://heroku_t05dnrwd:la2ijp9nttr5t62skgipbcoh89@ds151163.mlab.com:51163/heroku_t05dnrwd'
+
+mongoose.connect(uristring, function (err, res) {
+  if (err) {
+    console.log('failed to connect to db');
+  } else {
+    console.log('Successfully db connection');
+  }
+})
 
 var Schema = mongoose.Schema;
 
