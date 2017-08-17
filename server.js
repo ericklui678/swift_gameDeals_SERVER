@@ -1,12 +1,14 @@
 var express = require('express'),
   bodyParser = require('body-parser'),
   mongoose = require('mongoose'),
-  port = 8000,
+  // port = 8000,
   app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+
+app.set('port', (process.env.PORT || 8000))
 
 var uristring =
 process.env.MONGOLAB_URI ||
@@ -55,6 +57,7 @@ app.post('/delete/:id', function(req, res){
     res.redirect('/')
   })
 })
-app.listen(port, function(){
-  console.log('running on', port);
-})
+
+var server = app.listen(app.get('port'), function(){
+  console.log("Node app is running on port", app.get('port'));
+});
