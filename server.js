@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-mongoose.connect('mongodb://localhost/gamedeals');
+mongoose.connect('mongodb://heroku_t05dnrwd:la2ijp9nttr5t62skgipbcoh89@ds151163.mlab.com:51163/heroku_t05dnrwd');
 
 var Schema = mongoose.Schema;
 
